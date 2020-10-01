@@ -37,9 +37,6 @@ const MakerDAOGovernance = createSubgraph(ID_MAKER_DAO_GOVERNANCE, {
   // rinkeby: "..."
   // goerli: "..."
 });
-
-const useMakerDAOGovernance = () => ;
-
 function VoterRegistries() {
   // XXX: Fetch the useQuery hook.
   const { useQuery } = useSubgraph(ID_MAKER_DAO_GOVERNANCE);
