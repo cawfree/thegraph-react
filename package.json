@@ -24,7 +24,7 @@
     "react": "^16.13.1"
   },
   "name": "thegraph-react",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "⚛️  React bindings for helping build decentralized applications quickly on Ethereum and IPFS using GraphQL.",
   "main": "dist",
   "repository": "https://github.com/cawfree/thegraph-react",
