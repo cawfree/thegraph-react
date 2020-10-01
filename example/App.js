@@ -1,44 +1,88 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { 
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import { gql } from "@apollo/client";
 
-import GraphProtocolProvider, { createSubgraph, useSubgraph } from "thegraph-react";
+import GraphProtocolProvider, { Gnosis, useGnosis } from "./lib";
 
-const ID_MAKER_DAO_GOVERNANCE = "maker-dao-governance";
-
-const MakerDAOGovernance = createSubgraph(ID_MAKER_DAO_GOVERNANCE, {
-  mainnet: "https://api.thegraph.com/subgraphs/name/protofire/makerdao-governance"
+const styles = StyleSheet.create({
+  error: { color: "red" },
 });
 
-const useMakerDAOGovernance = () => useSubgraph(ID_MAKER_DAO_GOVERNANCE);
-
-function VoterRegistries() {
-  const { useQuery } = useMakerDAOGovernance();
-  const { loading, data, error } = useQuery(gql`
+function CurrentTokenPrice () {
+  const { useQuery } = useGnosis();
+  const { loading, error, data } = useQuery(
+    gql`
 {
-  voterRegistries(first: 5) {
+  prices(first: 5) {
     id
-    coldAddress
-    hotAddress
-    voteProxies {
+    token {
       id
     }
+    batchId
+    priceInOwlNumerator
   }
 }
-  `);
+    `,
+  );
+  if (loading) {
+    return <ActivityIndicator />;
+  } else if (error) {
+    return <Text children={JSON.stringify(error)}/>
+  }
   return (
-    <Text children={JSON.stringify(data)} />
+    <>
+      <Text children={JSON.stringify(data)} />
+    </>
+  );
+}
+
+function LazyCurrentTokenPrice () {
+  const { useLazyQuery } = useGnosis();
+  const [getCurrentTokenPrice, { loading, error, data }] = useLazyQuery(
+    gql`
+{
+  prices(first: 5) {
+    id
+    token {
+      id
+    }
+    batchId
+    priceInOwlNumerator
+  }
+}
+    `,
+  );
+  if (loading) {
+    return <ActivityIndicator />;
+  } else if (error) {
+    return <Text children={JSON.stringify(error)}/>
+  }
+  return (
+    <>
+      <Text children={JSON.stringify(data)} />
+      <TouchableOpacity
+        onPress={getCurrentTokenPrice}
+      >
+        <Text children="get" />
+      </TouchableOpacity>
+    </>
   );
 }
 
 export default function App() {
-  const [subgraphs] = useState([MakerDAOGovernance()]);
+  const [subgraphs] = useState([Gnosis()]);
   return (
     <GraphProtocolProvider
       subgraphs={subgraphs}
       chain="mainnet"
     >
-      <VoterRegistries />
+      <CurrentTokenPrice />
+      <LazyCurrentTokenPrice />
     </GraphProtocolProvider>
   );
 }

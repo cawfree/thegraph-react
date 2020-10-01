@@ -1,12 +1,14 @@
 {
   "dependencies": {
     "@apollo/client": "^3.2.1",
+    "apollo-link-ws": "^1.0.20",
     "expo": "~39.0.0",
     "graphql": "^15.3.0",
     "react": "~16.13.0",
     "react-dom": "~16.13.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-web": "0.13.13",
+    "subscriptions-transport-ws": "^0.9.18",
     "thegraph-react": "../"
   },
   "devDependencies": {
