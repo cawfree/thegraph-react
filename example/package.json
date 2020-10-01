@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@apollo/client": "^3.2.1",
+    "expo": "~39.0.0",
+    "graphql": "^15.3.0",
+    "react": "~16.13.0",
+    "react-dom": "~16.13.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
+    "react-native-web": "0.13.13",
+    "thegraph-react": "../"
+  },
+  "devDependencies": {
+    "@babel/core": "7.9.0"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo web",
+    "eject": "expo eject"
+  },
+  "private": true
+}
