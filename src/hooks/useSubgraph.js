@@ -22,8 +22,8 @@ export default function useSubgraph(name) {
     (query, options = {}) => gqlUseLazyQuery(
       query,
       {
-        client,
         ...options,
+        client,
       },
     ),
     [client],

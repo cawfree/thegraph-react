@@ -21,18 +21,28 @@ npm i -s graphql @apollo/client thegraph-react
 
 ```javascript
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { gql } from "@apollo/client";
 
 import GraphProtocolProvider, { createSubgraph, useSubgraph } from "thegraph-react";
 
+// XXX: Declare an internal id for the subgraph.
+//      This can be whatever you like.
 const ID_MAKER_DAO_GOVERNANCE = "maker-dao-governance";
 
 const MakerDAOGovernance = createSubgraph(ID_MAKER_DAO_GOVERNANCE, {
   mainnet: "https://api.thegraph.com/subgraphs/name/protofire/makerdao-governance"
+  // ropsten: ...
+  // rinkeby: ...
+  // kovan: ...
+  // goerli: ...
 });
 
 function VoterRegistries() {
+  // XXX: You could turn this into a hook.
+  //      i.e. const useMakerDAOGovernence() => useSubgraph(ID_MAKER_DAO_GOVERNANCE);
+  //      Calling useSubgraph returns useQuery and useLazyQuery,
+  //      scoped to the subgraph.
   const { useQuery } = useSubgraph(ID_MAKER_DAO_GOVERNANCE);
   const { loading, data, error } = useQuery(gql`
 {
@@ -52,12 +62,13 @@ function VoterRegistries() {
 }
 
 export default function App() {
-  const [subgraphs] = useState([MakerDAOGovernance()]);
+  const [subgraphs] = useState([
+    MakerDAOGovernance(),
+    // Gnosis(),
+    // UniswapV2(),
+  ]);
   return (
-    <GraphProtocolProvider
-      subgraphs={subgraphs}
-      chain="mainnet"
-    >
+    <GraphProtocolProvider subgraphs={subgraphs} chain="mainnet">
       <VoterRegistries />
     </GraphProtocolProvider>
   );

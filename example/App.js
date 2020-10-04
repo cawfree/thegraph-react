@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { gql } from "@apollo/client";
 
-import GraphProtocolProvider, { Gnosis, useGnosis } from "./lib";
+import GraphProtocolProvider, { Gnosis, useGnosis } from "thegraph-react";
 
 const styles = StyleSheet.create({
   error: { color: "red" },
