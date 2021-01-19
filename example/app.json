@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "ios": {
+      "bundleIdentifier": "io.github.cawfree.thegraph"
+    },
+    "android": {
+      "package": "io.github.cawfree.thegraph"
+    },
+    "scheme": "thegraphexample"
+  }
+}

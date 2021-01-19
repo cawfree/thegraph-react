@@ -1,24 +1,7 @@
-# thegraph-react
-⚛️  Helping build decentralized applications quickly on [**Ethereum**](https://ethereum.org/en/) and [**IPFS**](https://ipfs.io/) using GraphQL.
-
-Compatible with both [**React**](https://reactjs.org) and [**React Native**](https://reactnative.dev).
-
-## 🚀 Getting Started
-
-Using [**yarn**](https://yarnpkg.com):
-
-```
-yarn add thegraph-react
-```
-
-## ✍️ Usage
-
-```javascript
 import { gql, InMemoryCache } from "@apollo/client";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-
-import { Chains, Subgraph, Subgraphs, TheGraphProvider, useCreateSubgraph, useSubgraph } from './src';
+import { Chains, Subgraph, Subgraphs, TheGraphProvider, useCreateSubgraph, useSubgraph } from "thegraph-react";
 
 const styles = StyleSheet.create({
   center: { alignItems: "center", justifyContent: "center" },
@@ -52,7 +35,19 @@ function Aave({ aave }: {
     </View>
   );
 }
-```
 
-## ✌️ License
-[**MIT**](./LICENSE)
+export default function App(): JSX.Element {
+  const aave = useCreateSubgraph({
+    [Chains.MAINNET]: 'https://api.thegraph.com/subgraphs/name/aave/protocol',
+  }, { cache: new InMemoryCache() });
+
+  const subgraphs = React.useMemo((): Subgraphs => {
+    return [aave];
+  }, [aave]);
+
+  return (
+    <TheGraphProvider chain={Chains.MAINNET} subgraphs={subgraphs}>
+      <Aave aave={aave} />
+    </TheGraphProvider>
+  );
+}
