@@ -25,7 +25,7 @@
     "nanoid": "^3.1.20"
   },
   "name": "thegraph-react",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "⚛️  React bindings for helping build decentralized applications quickly on Ethereum and IPFS using GraphQL.",
   "main": "dist",
   "repository": "https://github.com/cawfree/thegraph-react",
