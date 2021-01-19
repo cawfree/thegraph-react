@@ -20,8 +20,7 @@ yarn add thegraph-react
 import { gql, InMemoryCache } from "@apollo/client";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-
-import { Chains, Subgraph, Subgraphs, TheGraphProvider, useCreateSubgraph, useSubgraph } from 'thegraph-react';
+import { Chains, Subgraph, Subgraphs, TheGraphProvider, useCreateSubgraph, useSubgraph } from "thegraph-react";
 
 const styles = StyleSheet.create({
   center: { alignItems: "center", justifyContent: "center" },
@@ -53,6 +52,22 @@ function Aave({ aave }: {
     <View style={[StyleSheet.absoluteFill, styles.center]}>
       <Text>{(error || loading) ? 'Loading...' : JSON.stringify(data)}</Text>
     </View>
+  );
+}
+
+export default function App(): JSX.Element {
+  const aave = useCreateSubgraph({
+    [Chains.MAINNET]: 'https://api.thegraph.com/subgraphs/name/aave/protocol',
+  }, { cache: new InMemoryCache() });
+
+  const subgraphs = React.useMemo((): Subgraphs => {
+    return [aave];
+  }, [aave]);
+
+  return (
+    <TheGraphProvider chain={Chains.MAINNET} subgraphs={subgraphs}>
+      <Aave aave={aave} />
+    </TheGraphProvider>
   );
 }
 ```
