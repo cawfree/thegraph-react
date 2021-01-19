@@ -4,7 +4,7 @@
 
 ⚛️  Helping build decentralized applications quickly on [**Ethereum**](https://ethereum.org/en/) and [**IPFS**](https://ipfs.io/) using GraphQL.
 
-Compatible with both [**React**](https://reactjs.org) and [**React Native**](https://reactnative.dev).
+Compatible with both [**React**](https://reactjs.org) and [**React Native**](https://reactnative.dev) (Android/iOS/Web).
 
 ## 🚀 Getting Started
 
