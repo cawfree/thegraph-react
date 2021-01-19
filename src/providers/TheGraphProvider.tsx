@@ -1,9 +1,9 @@
-import { ApolloClient } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import * as React from "react";
 
 import { TheGraphContext } from '../contexts';
 import { useTheGraph } from '../hooks';
-import type { CachingStrategy, Subgraph, SubgraphClients, Subgraphs, TheGraphContextValue, TheGraphSubgraphConfig } from '../types';
+import type { CachingStrategy, Subgraph, SubgraphClients, TheGraphContextValue, TheGraphSubgraphConfig } from '../types';
 
 export type TheGraphProviderProps = TheGraphSubgraphConfig & { 
   readonly children?: JSX.Element | readonly JSX.Element[];
@@ -14,14 +14,14 @@ export default function TheGraphProvider({
   subgraphs,
   children,
 }: TheGraphProviderProps): JSX.Element {
+  const cache = React.useMemo<InMemoryCache>(() => new InMemoryCache(), []);
   const nextClients = React.useMemo((): SubgraphClients => {
     return subgraphs.reduce(
       (e, { id, options, uris }: Subgraph) => ({
         ...e,
-        // @ts-ignore
-        [id]: new ApolloClient<CachingStrategy>({ ...options, uri: uris[chain] }),
+        [id]: new ApolloClient<CachingStrategy>({ ...(!!options && typeof options === 'object' ? options : {}), uri: uris[chain], cache }),
       }), {});
-  }, [subgraphs, chain]);
+  }, [subgraphs, chain, cache]);
   const parentContext = useTheGraph();
   const value = React.useMemo((): TheGraphContextValue => {
     const { subgraphs: parentSubgraphs, clients: parentClients } = parentContext;

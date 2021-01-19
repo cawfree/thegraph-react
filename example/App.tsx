@@ -1,4 +1,4 @@
-import { gql, InMemoryCache } from "@apollo/client";
+import { gql } from "@apollo/client";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Chains, Subgraph, Subgraphs, TheGraphProvider, useCreateSubgraph, useSubgraph } from "thegraph-react";
@@ -39,7 +39,7 @@ function Aave({ aave }: {
 export default function App(): JSX.Element {
   const aave = useCreateSubgraph({
     [Chains.MAINNET]: 'https://api.thegraph.com/subgraphs/name/aave/protocol',
-  }, { cache: new InMemoryCache() });
+  });
 
   const subgraphs = React.useMemo((): Subgraphs => {
     return [aave];

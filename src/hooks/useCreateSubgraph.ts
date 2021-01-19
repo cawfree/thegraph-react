@@ -5,7 +5,7 @@ import * as React from 'react';
 import { createSubgraph } from '../constants';
 import { Subgraph, SubgraphURIs } from '../types';
 
-export default function useCreateSubgraph(uris: SubgraphURIs, options: ApolloClientOptions<NormalizedCacheObject>): Subgraph {
+export default function useCreateSubgraph(uris: SubgraphURIs, options?: ApolloClientOptions<NormalizedCacheObject>): Subgraph {
   const id = React.useMemo(nanoid, []);
   return React.useMemo<Subgraph>(() => (
     createSubgraph(id, uris, options)
