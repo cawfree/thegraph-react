@@ -2,21 +2,29 @@
 
 ![https://camo.githubusercontent.com/0f9fcc0ac1b8617ad4989364f60f78b2d6b32985ad6a508f215f14d8f897b8d3/68747470733a2f2f62616467656e2e6e65742f62616467652f547970655363726970742f7374726963742532302546302539462539322541412f626c7565](https://camo.githubusercontent.com/0f9fcc0ac1b8617ad4989364f60f78b2d6b32985ad6a508f215f14d8f897b8d3/68747470733a2f2f62616467656e2e6e65742f62616467652f547970655363726970742f7374726963742532302546302539462539322541412f626c7565)
 
-⚛️  Helping build decentralized applications quickly on [**Ethereum**](https://ethereum.org/en/) and [**IPFS**](https://ipfs.io/) using GraphQL.
+⚛️  Build decentralized applications quickly and cheaply on [**Ethereum**](https://ethereum.org/en/) and [**IPFS**](https://ipfs.io/) using [**GraphQL**](https://www.apollographql.com/).
 
-Compatible with both [**React**](https://reactjs.org) and [**React Native**](https://reactnative.dev) (Android/iOS/Web).
+Compatible with both [**React**](https://reactjs.org) and [**React Native**](https://reactnative.dev)!
 
 ## 🚀 Getting Started
 
 Using [**yarn**](https://yarnpkg.com):
 
-```
+```sh
 yarn add thegraph-react
+```
+
+You'll also need to manually supply install the following dependencies:
+
+```sh
+@apollo/client
+graphql
+nanoid
 ```
 
 ## ✍️ Usage
 
-```javascript
+```typescript
 import { gql } from "@apollo/client";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
